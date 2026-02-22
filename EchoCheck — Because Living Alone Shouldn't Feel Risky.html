@@ -1,0 +1,919 @@
+<!DOCTYPE html>
+<!-- saved from url=(0051)file:///Users/charlie/Downloads/EchoCheck_Ad_2.html -->
+<html lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>EchoCheck — Because Living Alone Shouldn't Feel Risky</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,700&family=DM+Sans:wght@300;400;500;600&display=swap');
+
+  *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+  :root {
+    --navy:    #0D1B2A;
+    --teal:    #028090;
+    --seafoam: #00A896;
+    --mint:    #02C39A;
+    --white:   #FFFFFF;
+    --offwhite:#F0F4F8;
+    --gray:    #334155;
+    --lgray:   #94A3B8;
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--navy);
+    color: var(--white);
+    overflow-x: hidden;
+  }
+
+  /* ── HERO ─────────────────────────────── */
+  .hero {
+    min-height: 100vh;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    position: relative;
+    overflow: hidden;
+  }
+
+  /* Animated mesh background */
+  .hero::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background:
+      radial-gradient(ellipse 70% 60% at 20% 50%, rgba(2,128,144,0.25) 0%, transparent 60%),
+      radial-gradient(ellipse 50% 70% at 80% 20%, rgba(2,195,154,0.15) 0%, transparent 60%),
+      radial-gradient(ellipse 40% 40% at 70% 80%, rgba(0,168,150,0.1) 0%, transparent 50%);
+    animation: meshFloat 8s ease-in-out infinite alternate;
+    pointer-events: none;
+  }
+
+  @keyframes meshFloat {
+    from { transform: scale(1) rotate(0deg); opacity: 0.8; }
+    to   { transform: scale(1.05) rotate(1deg); opacity: 1; }
+  }
+
+  /* Grain texture overlay */
+  .hero::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+    pointer-events: none;
+    opacity: 0.4;
+  }
+
+  /* ── LEFT COLUMN ─── */
+  .hero-left {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 80px 60px 80px 80px;
+    position: relative;
+    z-index: 2;
+  }
+
+  .eyebrow {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--mint);
+    margin-bottom: 28px;
+    opacity: 0;
+    animation: fadeUp 0.8s ease 0.2s forwards;
+  }
+
+  .eyebrow::before {
+    content: '';
+    width: 32px; height: 2px;
+    background: var(--mint);
+    display: block;
+  }
+
+  .hero-title {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(46px, 5.5vw, 72px);
+    font-weight: 900;
+    line-height: 1.05;
+    margin-bottom: 16px;
+    opacity: 0;
+    animation: fadeUp 0.9s ease 0.35s forwards;
+  }
+
+  .hero-title .accent {
+    color: var(--mint);
+    font-style: italic;
+  }
+
+  .hero-sub {
+    font-size: 18px;
+    font-weight: 300;
+    color: rgba(255,255,255,0.7);
+    line-height: 1.6;
+    max-width: 420px;
+    margin-bottom: 44px;
+    opacity: 0;
+    animation: fadeUp 0.9s ease 0.5s forwards;
+  }
+
+  .hero-sub strong { color: var(--white); font-weight: 500; }
+
+  /* CTA buttons */
+  .cta-group {
+    display: flex;
+    gap: 16px;
+    flex-wrap: wrap;
+    opacity: 0;
+    animation: fadeUp 0.9s ease 0.65s forwards;
+  }
+
+  .btn-primary {
+    background: var(--teal);
+    color: var(--white);
+    border: none;
+    padding: 16px 36px;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 15px;
+    font-weight: 600;
+    cursor: pointer;
+    clip-path: polygon(0 0, calc(100% - 12px) 0, 100% 12px, 100% 100%, 12px 100%, 0 calc(100% - 12px));
+    transition: background 0.25s, transform 0.2s;
+    letter-spacing: 0.03em;
+  }
+  .btn-primary:hover { background: var(--seafoam); transform: translateY(-2px); }
+
+  .btn-ghost {
+    background: transparent;
+    color: var(--white);
+    border: 1.5px solid rgba(255,255,255,0.3);
+    padding: 16px 32px;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 15px;
+    font-weight: 400;
+    cursor: pointer;
+    transition: border-color 0.25s, color 0.25s;
+    letter-spacing: 0.02em;
+  }
+  .btn-ghost:hover { border-color: var(--mint); color: var(--mint); }
+
+  /* Trust badges */
+  .trust-row {
+    display: flex;
+    gap: 28px;
+    margin-top: 52px;
+    flex-wrap: wrap;
+    opacity: 0;
+    animation: fadeUp 0.9s ease 0.8s forwards;
+  }
+
+  .trust-item {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .trust-num {
+    font-family: 'Playfair Display', serif;
+    font-size: 28px;
+    font-weight: 700;
+    color: var(--mint);
+    line-height: 1;
+  }
+
+  .trust-label {
+    font-size: 11px;
+    color: var(--lgray);
+    font-weight: 400;
+    letter-spacing: 0.04em;
+    margin-top: 4px;
+  }
+
+  .trust-sep {
+    width: 1px; background: rgba(255,255,255,0.15);
+    align-self: stretch;
+  }
+
+  /* ── RIGHT COLUMN ─── */
+  .hero-right {
+    position: relative;
+    z-index: 2;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 60px 60px 60px 20px;
+  }
+
+  /* Phone mockup */
+  .phone-wrap {
+    position: relative;
+    opacity: 0;
+    animation: fadeLeft 1s ease 0.4s forwards;
+  }
+
+  @keyframes fadeLeft {
+    from { opacity: 0; transform: translateX(40px); }
+    to   { opacity: 1; transform: translateX(0); }
+  }
+
+  .phone {
+    width: 240px;
+    height: 480px;
+    background: var(--navy);
+    border: 2.5px solid rgba(2,128,144,0.6);
+    border-radius: 36px;
+    position: relative;
+    box-shadow:
+      0 0 0 8px rgba(2,128,144,0.08),
+      0 40px 80px rgba(0,0,0,0.5),
+      inset 0 0 40px rgba(2,128,144,0.05);
+    overflow: hidden;
+  }
+
+  /* Notch */
+  .phone::before {
+    content: '';
+    position: absolute;
+    top: 10px; left: 50%; transform: translateX(-50%);
+    width: 60px; height: 6px;
+    background: rgba(255,255,255,0.1);
+    border-radius: 3px;
+    z-index: 10;
+  }
+
+  .phone-screen {
+    position: absolute;
+    inset: 0;
+    padding: 30px 18px 20px;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .phone-header {
+    text-align: center;
+    margin-bottom: 20px;
+  }
+
+  .phone-logo {
+    font-family: 'Playfair Display', serif;
+    font-size: 16px;
+    font-weight: 700;
+    color: var(--white);
+  }
+
+  .phone-logo span { color: var(--mint); }
+
+  /* Check-in card */
+  .checkin-card {
+    background: rgba(2,128,144,0.15);
+    border: 1px solid rgba(2,128,144,0.4);
+    border-radius: 16px;
+    padding: 16px;
+    margin-bottom: 12px;
+  }
+
+  .checkin-label {
+    font-size: 9px;
+    color: var(--mint);
+    font-weight: 600;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    margin-bottom: 6px;
+  }
+
+  .checkin-q {
+    font-size: 14px;
+    color: var(--white);
+    font-weight: 500;
+    line-height: 1.35;
+    margin-bottom: 14px;
+  }
+
+  .checkin-btns {
+    display: flex;
+    gap: 8px;
+  }
+
+  .cb {
+    flex: 1;
+    padding: 8px 4px;
+    border-radius: 8px;
+    font-size: 11px;
+    font-weight: 600;
+    text-align: center;
+    font-family: 'DM Sans', sans-serif;
+  }
+
+  .cb-yes { background: var(--mint); color: var(--navy); }
+  .cb-no  { background: rgba(255,255,255,0.08); color: var(--white); border: 1px solid rgba(255,255,255,0.15); }
+
+  /* Status items */
+  .status-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 10px 12px;
+    background: rgba(255,255,255,0.04);
+    border-radius: 10px;
+    margin-bottom: 8px;
+  }
+
+  .status-dot {
+    width: 8px; height: 8px;
+    border-radius: 50%;
+    flex-shrink: 0;
+  }
+  .dot-green { background: var(--mint); box-shadow: 0 0 6px var(--mint); animation: pulse 2s infinite; }
+  .dot-yellow { background: #F59E0B; }
+
+  @keyframes pulse {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.4; }
+  }
+
+  .status-text {
+    font-size: 11px;
+    color: rgba(255,255,255,0.7);
+    line-height: 1.3;
+  }
+
+  .status-text strong { color: var(--white); display: block; font-size: 12px; }
+
+  /* Alert pill */
+  .alert-pill {
+    background: rgba(2,195,154,0.12);
+    border: 1px solid rgba(2,195,154,0.3);
+    border-radius: 20px;
+    padding: 6px 14px;
+    font-size: 10px;
+    color: var(--mint);
+    font-weight: 500;
+    text-align: center;
+    margin-top: auto;
+  }
+
+  /* Floating cards around phone */
+  .float-card {
+    position: absolute;
+    background: rgba(255,255,255,0.06);
+    backdrop-filter: blur(12px);
+    border: 1px solid rgba(255,255,255,0.1);
+    border-radius: 12px;
+    padding: 12px 16px;
+    white-space: nowrap;
+    animation: floatY 4s ease-in-out infinite alternate;
+  }
+
+  @keyframes floatY {
+    from { transform: translateY(0px); }
+    to   { transform: translateY(-8px); }
+  }
+
+  .fc1 {
+    top: 15%; left: -110px;
+    animation-delay: 0s;
+    display: flex; align-items: center; gap: 10px;
+  }
+
+  .fc2 {
+    bottom: 25%; right: -120px;
+    animation-delay: 1.5s;
+    display: flex; align-items: center; gap: 10px;
+  }
+
+  .fc3 {
+    top: 55%; left: -130px;
+    animation-delay: 0.8s;
+    display: flex; align-items: center; gap: 8px;
+  }
+
+  .fc-icon {
+    width: 32px; height: 32px;
+    border-radius: 8px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 16px;
+  }
+
+  .fc-text { display: flex; flex-direction: column; }
+  .fc-title { font-size: 12px; font-weight: 600; color: var(--white); }
+  .fc-sub   { font-size: 10px; color: var(--lgray); margin-top: 1px; }
+
+  /* ── FEATURES STRIP ──── */
+  .features {
+    background: rgba(2,128,144,0.08);
+    border-top: 1px solid rgba(2,128,144,0.2);
+    border-bottom: 1px solid rgba(2,128,144,0.2);
+    padding: 60px 80px;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 40px;
+  }
+
+  .feature {
+    opacity: 0;
+    animation: fadeUp 0.8s ease forwards;
+  }
+  .feature:nth-child(1) { animation-delay: 0.1s; }
+  .feature:nth-child(2) { animation-delay: 0.25s; }
+  .feature:nth-child(3) { animation-delay: 0.4s; }
+
+  .feature-icon {
+    width: 44px; height: 44px;
+    border-radius: 10px;
+    background: rgba(2,128,144,0.2);
+    border: 1px solid rgba(2,128,144,0.4);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 20px;
+    margin-bottom: 16px;
+  }
+
+  .feature h3 {
+    font-size: 16px;
+    font-weight: 600;
+    color: var(--white);
+    margin-bottom: 8px;
+  }
+
+  .feature p {
+    font-size: 14px;
+    color: var(--lgray);
+    line-height: 1.6;
+    font-weight: 300;
+  }
+
+  /* ── PRICING ────────── */
+  .pricing {
+    padding: 80px 80px;
+    background: var(--navy);
+    text-align: center;
+  }
+
+  .section-label {
+    font-size: 11px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--mint);
+    font-weight: 600;
+    margin-bottom: 12px;
+  }
+
+  .section-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 38px;
+    font-weight: 700;
+    margin-bottom: 48px;
+    color: var(--white);
+  }
+
+  .pricing-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 24px;
+    max-width: 900px;
+    margin: 0 auto;
+  }
+
+  .pricing-card {
+    border: 1px solid rgba(255,255,255,0.1);
+    border-radius: 16px;
+    padding: 32px 24px;
+    text-align: left;
+    transition: transform 0.25s, border-color 0.25s;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .pricing-card:hover { transform: translateY(-4px); border-color: rgba(2,128,144,0.5); }
+
+  .pricing-card.featured {
+    background: linear-gradient(135deg, rgba(2,128,144,0.25), rgba(2,195,154,0.1));
+    border-color: var(--teal);
+  }
+
+  .pricing-card.featured::before {
+    content: 'MOST POPULAR';
+    position: absolute;
+    top: 14px; right: -28px;
+    background: var(--mint);
+    color: var(--navy);
+    font-size: 9px;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    padding: 4px 36px;
+    transform: rotate(45deg);
+  }
+
+  .pc-label {
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--mint);
+    margin-bottom: 12px;
+  }
+
+  .pc-price {
+    font-family: 'Playfair Display', serif;
+    font-size: 42px;
+    font-weight: 700;
+    color: var(--white);
+    line-height: 1;
+    margin-bottom: 4px;
+  }
+
+  .pc-price sup { font-size: 20px; vertical-align: super; }
+  .pc-price span { font-size: 16px; font-family: 'DM Sans', sans-serif; font-weight: 300; color: var(--lgray); }
+
+  .pc-desc {
+    font-size: 13px;
+    color: var(--lgray);
+    margin-bottom: 24px;
+    font-weight: 300;
+    line-height: 1.5;
+  }
+
+  .pc-features { list-style: none; display: flex; flex-direction: column; gap: 10px; }
+
+  .pc-features li {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    font-size: 13px;
+    color: rgba(255,255,255,0.75);
+    line-height: 1.4;
+  }
+
+  .pc-features li::before {
+    content: '✓';
+    color: var(--mint);
+    font-weight: 700;
+    flex-shrink: 0;
+    margin-top: 1px;
+  }
+
+  /* ── CLOSING BAND ───── */
+  .closing {
+    background: linear-gradient(135deg, var(--teal) 0%, #016070 50%, var(--navy) 100%);
+    padding: 80px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    align-items: center;
+    gap: 60px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .closing::before {
+    content: '';
+    position: absolute;
+    top: -80px; right: -80px;
+    width: 300px; height: 300px;
+    border-radius: 50%;
+    border: 1px solid rgba(255,255,255,0.08);
+  }
+
+  .closing::after {
+    content: '';
+    position: absolute;
+    bottom: -100px; left: -60px;
+    width: 240px; height: 240px;
+    border-radius: 50%;
+    border: 1px solid rgba(255,255,255,0.06);
+  }
+
+  .closing-left { position: relative; z-index: 1; }
+
+  .closing-eyebrow {
+    font-size: 11px; letter-spacing: 0.18em;
+    text-transform: uppercase; color: rgba(255,255,255,0.6);
+    font-weight: 500; margin-bottom: 14px;
+  }
+
+  .closing-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 40px; font-weight: 900;
+    line-height: 1.1; color: var(--white);
+    margin-bottom: 20px;
+  }
+
+  .closing-body {
+    font-size: 15px; color: rgba(255,255,255,0.75);
+    line-height: 1.65; font-weight: 300;
+    margin-bottom: 32px;
+  }
+
+  .closing-right {
+    position: relative; z-index: 1;
+    background: rgba(0,0,0,0.2);
+    border: 1px solid rgba(255,255,255,0.12);
+    border-radius: 20px;
+    padding: 36px;
+  }
+
+  .cr-title {
+    font-size: 13px; color: rgba(255,255,255,0.5);
+    font-weight: 500; letter-spacing: 0.05em;
+    margin-bottom: 20px; text-transform: uppercase;
+  }
+
+  .cr-stat {
+    display: flex;
+    align-items: baseline;
+    gap: 10px;
+    margin-bottom: 16px;
+    padding-bottom: 16px;
+    border-bottom: 1px solid rgba(255,255,255,0.08);
+  }
+
+  .cr-stat:last-of-type { border-bottom: none; }
+
+  .cr-num {
+    font-family: 'Playfair Display', serif;
+    font-size: 32px; font-weight: 700;
+    color: var(--white);
+  }
+
+  .cr-label {
+    font-size: 13px; color: rgba(255,255,255,0.6);
+    font-weight: 300;
+  }
+
+  /* ── FOOTER ─────────── */
+  .footer {
+    background: #060e17;
+    padding: 24px 80px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-top: 1px solid rgba(2,128,144,0.3);
+  }
+
+  .footer-brand {
+    font-family: 'Playfair Display', serif;
+    font-size: 18px; font-weight: 700; color: var(--white);
+  }
+
+  .footer-brand span { color: var(--mint); }
+
+  .footer-contact {
+    font-size: 12px; color: var(--lgray);
+    letter-spacing: 0.04em;
+  }
+
+  .footer-tag {
+    font-size: 11px; color: rgba(255,255,255,0.3);
+    font-style: italic;
+  }
+
+  /* ── ANIMATIONS ─────── */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(24px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  /* ── RESPONSIVE ─────── */
+  @media (max-width: 900px) {
+    .hero { grid-template-columns: 1fr; }
+    .hero-right { display: none; }
+    .hero-left { padding: 60px 40px; }
+    .features { grid-template-columns: 1fr; padding: 40px; gap: 32px; }
+    .pricing-grid { grid-template-columns: 1fr; }
+    .pricing { padding: 60px 40px; }
+    .closing { grid-template-columns: 1fr; padding: 60px 40px; }
+    .footer { flex-direction: column; gap: 8px; text-align: center; padding: 20px 40px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ══ HERO ════════════════════════════════ -->
+<section class="hero">
+  <div class="hero-left">
+    <div class="eyebrow">Safety Reimagined for Solo Living</div>
+
+    <h1 class="hero-title">
+      Living Alone<br>
+      <span class="accent">Shouldn't</span> Mean<br>
+      Living Scared.
+    </h1>
+
+    <p class="hero-sub">
+      EchoCheck gives young adults living alone a <strong>quiet safety net</strong> —
+      daily wellness check-ins that notify your trusted circle only when it matters.
+      No cameras. No anxiety. Just peace of mind at <strong>$4.99/month.</strong>
+    </p>
+
+    <div class="cta-group">
+      <button class="btn-primary">Start Free Trial →</button>
+      <button class="btn-ghost">See How It Works</button>
+    </div>
+
+    <div class="trust-row">
+      <div class="trust-item">
+        <div class="trust-num">36M</div>
+        <div class="trust-label">Americans live alone</div>
+      </div>
+      <div class="trust-sep"></div>
+      <div class="trust-item">
+        <div class="trust-num">$4.99</div>
+        <div class="trust-label">Starting per month</div>
+      </div>
+      <div class="trust-sep"></div>
+      <div class="trust-item">
+        <div class="trust-num">0</div>
+        <div class="trust-label">Cameras or surveillance</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="hero-right">
+    <div class="phone-wrap">
+
+      <!-- Floating cards -->
+      <div class="float-card fc1">
+        <div class="fc-icon" style="background:rgba(2,195,154,0.15);">🛡️</div>
+        <div class="fc-text">
+          <div class="fc-title">Check-in complete</div>
+          <div class="fc-sub">Sarah is safe · 2 min ago</div>
+        </div>
+      </div>
+
+      <div class="float-card fc2">
+        <div class="fc-icon" style="background:rgba(2,128,144,0.15);">👥</div>
+        <div class="fc-text">
+          <div class="fc-title">3 contacts notified</div>
+          <div class="fc-sub">Mom · Best Friend · RA</div>
+        </div>
+      </div>
+
+      <div class="float-card fc3">
+        <div class="fc-icon" style="background:rgba(255,255,255,0.08);">⌚</div>
+        <div class="fc-text">
+          <div class="fc-title">Worry Doll active</div>
+          <div class="fc-sub">Motion: normal</div>
+        </div>
+      </div>
+
+      <!-- Phone -->
+      <div class="phone">
+        <div class="phone-screen">
+          <div class="phone-header">
+            <div class="phone-logo">Echo<span>Check</span></div>
+          </div>
+
+          <div class="checkin-card">
+            <div class="checkin-label">🔔 Daily Check-In</div>
+            <div class="checkin-q">Hey! Just checking in —<br>are you doing okay today?</div>
+            <div class="checkin-btns">
+              <div class="cb cb-yes">✓ I'm Good</div>
+              <div class="cb cb-no">Need Help</div>
+            </div>
+          </div>
+
+          <div class="status-item">
+            <div class="status-dot dot-green"></div>
+            <div class="status-text">
+              <strong>All contacts active</strong>
+              Mom · Jamie · Campus RA
+            </div>
+          </div>
+
+          <div class="status-item">
+            <div class="status-dot dot-green"></div>
+            <div class="status-text">
+              <strong>Worry Doll connected</strong>
+              Battery 87% · Motion normal
+            </div>
+          </div>
+
+          <div class="status-item">
+            <div class="status-dot" style="background:rgba(255,255,255,0.2);"></div>
+            <div class="status-text">
+              <strong>Next check-in</strong>
+              Tomorrow at 9:00 AM
+            </div>
+          </div>
+
+          <div class="alert-pill">✓ You're protected 24/7</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ FEATURES ═══════════════════════════ -->
+<section class="features">
+  <div class="feature">
+    <div class="feature-icon">🔔</div>
+    <h3>Daily Wellness Check-Ins</h3>
+    <p>A gentle daily ping — if you don't respond in your set window, your trusted contacts are immediately notified. Simple. Reliable. Respectful.</p>
+  </div>
+  <div class="feature">
+    <div class="feature-icon">⌚</div>
+    <h3>"Worry Doll" Wearable</h3>
+    <p>A discreet button and inactivity sensor you can wear anywhere. Press once for help. No response needed — the sensor monitors automatically.</p>
+  </div>
+  <div class="feature">
+    <div class="feature-icon">🔒</div>
+    <h3>Privacy-First Architecture</h3>
+    <p>No cameras. No audio. No constant monitoring. EchoCheck only acts when you need it — invisible until it matters most.</p>
+  </div>
+</section>
+
+<!-- ══ PRICING ══════════════════════════════ -->
+<section class="pricing">
+  <div class="section-label">Simple Pricing</div>
+  <h2 class="section-title">Peace of Mind, Starting at $4.99</h2>
+
+  <div class="pricing-grid">
+    <div class="pricing-card">
+      <div class="pc-label">Basic</div>
+      <div class="pc-price"><sup>$</sup>4<span>.99/mo</span></div>
+      <div class="pc-desc">Perfect for getting started with solo-living safety.</div>
+      <ul class="pc-features">
+        <li>Daily automated check-in</li>
+        <li>1 trusted emergency contact</li>
+        <li>App-based notifications</li>
+        <li>Response window customization</li>
+      </ul>
+    </div>
+
+    <div class="pricing-card featured">
+      <div class="pc-label">Premium</div>
+      <div class="pc-price"><sup>$</sup>9<span>.99/mo</span></div>
+      <div class="pc-desc">Full protection with your closest circle on standby.</div>
+      <ul class="pc-features">
+        <li>Everything in Basic</li>
+        <li>Up to 3 trusted contacts</li>
+        <li>Priority alert system</li>
+        <li>Family dashboard add-on eligible</li>
+        <li>"Worry Doll" wearable compatible</li>
+      </ul>
+    </div>
+
+    <div class="pricing-card">
+      <div class="pc-label">Hardware Add-On</div>
+      <div class="pc-price"><sup>$</sup>69<span>.99</span></div>
+      <div class="pc-desc">The "Worry Doll" — your silent, wearable guardian.</div>
+      <ul class="pc-features">
+        <li>Discreet emergency button</li>
+        <li>Built-in inactivity sensor</li>
+        <li>One-time purchase</li>
+        <li>Works with any subscription tier</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- ══ CLOSING CTA ══════════════════════════ -->
+<section class="closing">
+  <div class="closing-left">
+    <div class="closing-eyebrow">Join EchoCheck Today</div>
+    <h2 class="closing-title">Your safety<br>network is<br>one tap away.</h2>
+    <p class="closing-body">
+      Whether you're a college student in your first apartment, a young professional in a new city,
+      or an international student far from home — EchoCheck is the quiet reassurance
+      that someone always has your back.
+    </p>
+    <button class="btn-primary" style="font-size:16px; padding:18px 44px;">
+      Download EchoCheck Free →
+    </button>
+  </div>
+
+  <div class="closing-right">
+    <div class="cr-title">By the Numbers</div>
+    <div class="cr-stat">
+      <div class="cr-num">$2,975</div>
+      <div class="cr-label">Year 1 projected revenue</div>
+    </div>
+    <div class="cr-stat">
+      <div class="cr-num">$23,335</div>
+      <div class="cr-label">Year 2 projected revenue (+684%)</div>
+    </div>
+    <div class="cr-stat">
+      <div class="cr-num">M22</div>
+      <div class="cr-label">Break-even month</div>
+    </div>
+    <div class="cr-stat">
+      <div class="cr-num">330</div>
+      <div class="cr-label">Subscribers by end of Year 2</div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ FOOTER ════════════════════════════════ -->
+<footer class="footer">
+  <div class="footer-brand">Echo<span>Check</span></div>
+  <div class="footer-contact">contact@echocheck.app · echocheck.app</div>
+  <div class="footer-tag">"Because Living Alone Shouldn't Feel Risky."</div>
+</footer>
+
+
+
+</body></html>
